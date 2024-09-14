@@ -20,15 +20,12 @@ public class GateController2D : MonoBehaviour
         if (playerInTrigger)
         {
             foreach(var i in inners)
-            {
                 if (i == null)
-                {
                     inners.Remove(i);
-                    playerInTrigger = false;
-                    return;
-                }
-                
-            }
+
+            if (inners.Count == 0)
+                playerInTrigger = false;
+
             OpenGate(); // Если игрок в зоне — ворота открываются
         }
         else
@@ -63,9 +60,10 @@ public class GateController2D : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInTrigger = false; // Игрок вышел из зоны триггера
             if(inners.Contains(other))
                 inners.Remove(other);
+            if (inners.Count == 0)
+                playerInTrigger = false;
         }
     }
     
