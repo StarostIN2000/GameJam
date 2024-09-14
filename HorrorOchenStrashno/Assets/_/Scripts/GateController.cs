@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GateController2D : MonoBehaviour
@@ -8,10 +9,26 @@ public class GateController2D : MonoBehaviour
     public float gateSpeed = 2f; // Скорость открытия/закрытия ворот
     private bool playerInTrigger = false; // Проверка на то, находится ли игрок в зоне триггера
 
+    List<Collider> inners;
+
+    private void Start()
+    {
+        inners = new List<Collider>();
+    }
     void FixedUpdate()
     {
         if (playerInTrigger)
         {
+            foreach(var i in inners)
+            {
+                if (i == null)
+                {
+                    inners.Remove(i);
+                    playerInTrigger = false;
+                    return;
+                }
+                
+            }
             OpenGate(); // Если игрок в зоне — ворота открываются
         }
         else
@@ -36,6 +53,7 @@ public class GateController2D : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInTrigger = true; // Игрок в зоне триггера
+            inners.Add(other);
             Debug.Log("Оу дааааа");
         }
     }
@@ -46,6 +64,9 @@ public class GateController2D : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInTrigger = false; // Игрок вышел из зоны триггера
+            if(inners.Contains(other))
+                inners.Remove(other);
         }
     }
+    
 }
