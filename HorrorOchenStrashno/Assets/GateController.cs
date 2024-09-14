@@ -8,7 +8,7 @@ public class GateController2D : MonoBehaviour
     public float gateSpeed = 2f; // Скорость открытия/закрытия ворот
     private bool playerInTrigger = false; // Проверка на то, находится ли игрок в зоне триггера
 
-    void Update()
+    void FixedUpdate()
     {
         if (playerInTrigger)
         {

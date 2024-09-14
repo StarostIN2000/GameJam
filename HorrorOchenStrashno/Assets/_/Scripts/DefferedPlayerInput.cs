@@ -37,7 +37,7 @@ public class DefferedPlayerInput : MonoBehaviour
 
     void Start()
     {
-        m_realPlayerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+        m_realPlayerInput = FindObjectOfType<CloneSpawner>().GetComponent<PlayerInput>();
         m_PlayerInput = gameObject.GetComponent<PlayerInput>();
         m_spawner = m_realPlayerInput.GetComponent<CloneSpawner>();
         m_image = GameObject.Find("TimeBar_rec").GetComponent<Image>();
