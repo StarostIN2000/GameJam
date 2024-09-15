@@ -25,4 +25,8 @@ public class MainMenu : MonoBehaviour
         m_main.SetActive(b);
         m_levels.SetActive(!b);
     }
+    public void PlayLevel(int l)
+    {
+        SceneManager.LoadScene(l);
+    }
 }
